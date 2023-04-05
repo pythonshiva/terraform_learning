@@ -53,3 +53,9 @@ output "aws_availability_zones" {
 output "bucket_info" {
   value = aws_s3_bucket.Bucket1.bucket
 }
+
+# Interpolation
+# Substitute values in strings
+resource "aws_s3_bucket" "bucket2" {
+  bucket = "${data.aws_caller_identity.current.account_id}-bucket2"
+}
