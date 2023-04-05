@@ -34,12 +34,22 @@ data "aws_availability_zones" "available" {
 # resources described, If the resouce is already created then it must be imported
 # to terraform's state 
 resource "aws_s3_bucket" "Bucket1" {
-    bucket = "Bucket1"
 }
 
-# Output
+# Outputs
 output "greeting" {
     value = "Hello terraform"
   
 }
 
+output "aws_caller_info" {
+    value = data.aws_caller_identity.current
+}
+
+output "aws_availability_zones" {
+  value = data.aws_availability_zones.available
+}
+
+output "bucket_info" {
+  value = aws_s3_bucket.Bucket1.bucket
+}
