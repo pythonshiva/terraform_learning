@@ -92,9 +92,9 @@ variable "bucket_name" {
   # default = "my-bucket"
 }
 
-resource "aws_s3_bucket" "Bucket5" {
-  bucket = var.bucket_name
-}
+# resource "aws_s3_bucket" "Bucket5" {
+#   bucket = var.bucket_name
+# }
 
 # Local values
 # Local values allow you to assign a name to an expression. Locals can make your code more readable
@@ -133,4 +133,19 @@ locals {
 resource "aws_s3_bucket" "bucketFE" {
   for_each = local.buckets
   bucket = "${local.aws_account}-${each.value}"
+}
+
+# Conditionals
+variable "bucket_count" {
+  type = number
+}
+
+locals {
+  minimum_number_of_buckets = 5
+  number_of_buckets = var.bucket_count >0 ? var.bucket_count : local.minimum_number_of_buckets
+}
+
+resource "aws_s3_bucket" "buckets" {
+  count = local.number_of_buckets
+  bucket = "${local.aws_account}-bucket${count.index+7}"
 }
