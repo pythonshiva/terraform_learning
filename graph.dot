@@ -1,0 +1,31 @@
+digraph {
+	compound = "true"
+	newrank = "true"
+	subgraph "root" {
+		"[root] aws_s3_bucket.Bucket1 (expand)" [label = "aws_s3_bucket.Bucket1", shape = "box"]
+		"[root] aws_s3_bucket.bucket2 (expand)" [label = "aws_s3_bucket.bucket2", shape = "box"]
+		"[root] aws_s3_bucket.bucket3 (expand)" [label = "aws_s3_bucket.bucket3", shape = "box"]
+		"[root] aws_s3_bucket.bucket4 (expand)" [label = "aws_s3_bucket.bucket4", shape = "box"]
+		"[root] data.aws_availability_zones.available (expand)" [label = "data.aws_availability_zones.available", shape = "box"]
+		"[root] data.aws_caller_identity.current (expand)" [label = "data.aws_caller_identity.current", shape = "box"]
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"]" [label = "provider[\"registry.terraform.io/hashicorp/aws\"]", shape = "diamond"]
+		"[root] aws_s3_bucket.Bucket1 (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"]"
+		"[root] aws_s3_bucket.bucket2 (expand)" -> "[root] data.aws_caller_identity.current (expand)"
+		"[root] aws_s3_bucket.bucket3 (expand)" -> "[root] aws_s3_bucket.bucket2 (expand)"
+		"[root] aws_s3_bucket.bucket4 (expand)" -> "[root] aws_s3_bucket.bucket3 (expand)"
+		"[root] data.aws_availability_zones.available (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"]"
+		"[root] data.aws_caller_identity.current (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"]"
+		"[root] output.aws_availability_zones (expand)" -> "[root] data.aws_availability_zones.available (expand)"
+		"[root] output.aws_caller_info (expand)" -> "[root] data.aws_caller_identity.current (expand)"
+		"[root] output.bucket_info (expand)" -> "[root] aws_s3_bucket.Bucket1 (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] aws_s3_bucket.Bucket1 (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] aws_s3_bucket.bucket4 (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] data.aws_availability_zones.available (expand)"
+		"[root] root" -> "[root] output.aws_availability_zones (expand)"
+		"[root] root" -> "[root] output.aws_caller_info (expand)"
+		"[root] root" -> "[root] output.bucket_info (expand)"
+		"[root] root" -> "[root] output.greeting (expand)"
+		"[root] root" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)"
+	}
+}
+

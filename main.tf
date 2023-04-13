@@ -106,3 +106,31 @@ resource "aws_s3_bucket" "Bucket6" {
   bucket = "${local.aws_account}-bucket6"
 }
 
+# Count
+# All the resources have a `count` parameter. The default is 1.
+# If a count is set then a list of resources is returned(Even if there is only one)
+# If `count` is set, Then a `count.index` value is available. The value contains the current 
+# iteration number.
+# TIP: Setting `count =0` is a handy way to remove a resource but to keep the config
+resource "aws_s3_bucket" "bucketX" {
+  count = 4
+  bucket = "${local.aws_account}-bucket${count.index+7}"
+}
+
+# for_each
+# Resources may have a `for_each` parameter.
+# If for_each is set, then a resource is created for each item in the set and a 
+# special `each` object is available. The each object has a key and value 
+# attributes that can be referenced.
+
+locals {
+  buckets = {
+    bucket101 = "mybucket101"
+    bucket102 = "mybucket102"
+  }
+}
+
+resource "aws_s3_bucket" "bucketFE" {
+  for_each = local.buckets
+  bucket = "${local.aws_account}-${each.value}"
+}
