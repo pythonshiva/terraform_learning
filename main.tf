@@ -6,7 +6,7 @@ terraform {
 #Provider
 # Implement cloud specifc API and Terrafrom API
 # Provider configuration is specific to each provider
-#Providers expose Data sources and Resources to Terrafrom
+# Providers expose Data sources and Resources to Terrafrom
 
 provider "aws" {
     version = "~> 2.0"
@@ -30,7 +30,7 @@ data "aws_availability_zones" "available" {
 
 # Resources
 # Objects managed by terrafrom
-# Declring resources tells terrafrom that it shold create and manage the 
+# Declaring resources tells terrafrom that it should create and manage the 
 # resources described, If the resouce is already created then it must be imported
 # to terraform's state 
 resource "aws_s3_bucket" "Bucket1" {
